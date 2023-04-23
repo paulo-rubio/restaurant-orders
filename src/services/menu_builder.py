@@ -26,4 +26,17 @@ class MenuBuilder:
 
     # Req 4
     def get_main_menu(self, restriction=None) -> pd.DataFrame:
-        pass
+        dishes = {
+            "dish_name": [],
+            "ingredients": [],
+            "price": [],
+            "restrictions": []
+            }
+
+        for index in self.menu_data.dishes:
+            if restriction not in index.get_restrictions():
+                dishes["dish_name"].append(index.name)
+                dishes["ingredients"].append(index.get_ingredients())
+                dishes["price"].append(index.price)
+                dishes["restrictions"].append(index.get_restrictions())
+        return pd.DataFrame(dishes)
